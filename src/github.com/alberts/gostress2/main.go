@@ -301,26 +301,3 @@ func main() {
 	close(q)
 	workersWg.Wait()
 }
-
-// TODO cgo enabled/disabled... this happens at the go level
-// TODO goarches... need separate GOROOTs. ditto for cgo enabled/disabled
-// TODO handle -race at this level too
-// ./gostress2 -build
-// builds all these options under $TMPDIR/go_linux_amd64_race
-
-// fiddle with timeouts?
-
-// web interface to publish results
-// web interface to upload CL for testing... puts it in a queue on google app engine
-// builders poll it
-
-// build input:
-// go revision or tip
-// list of subrepos
-// subrepo revisions or tips
-// one or more CLs per subrepo to apply
-
-// run input:
-// list of packages to include
-// if empty, include everything
-// list of pacakges to exclude
