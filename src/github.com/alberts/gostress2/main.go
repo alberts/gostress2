@@ -186,7 +186,7 @@ func (w *work) Do() {
 		if w.timeLeft < 0 {
 			w.timeLeft = 0
 		}
-		//log.Printf("%s: remaining: %d reps, %v time", w.ImportPath, w.reps, w.timeLeft)
+		log.Printf("%s: remaining: %d repetitions, %v time", w.ImportPath, w.reps, w.timeLeft)
 	}()
 
 	var env []string
