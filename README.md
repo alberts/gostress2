@@ -15,6 +15,7 @@ Usage of gostress2:
   -reps=1: repetitions
   -seed=1364657604277567273: seed
   -strace=false: strace some tests
+  -sudo=false: sudo some tests
   -workers=1: number of workers
 ```
 
