@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"math/rand"
+	"strings"
 )
 
 type Package struct {
@@ -25,7 +26,9 @@ type Package struct {
 }
 
 func getPackages(list string, shuffle bool) []Package {
-	js, err := stdout(".", "go", "list", "-json", list)
+	args := []string{"go", "list", "-json"}
+	args = append(args, strings.Split(list, " ")...)
+	js, err := stdout(".", args...)
 	if err != nil {
 		panic(err)
 	}

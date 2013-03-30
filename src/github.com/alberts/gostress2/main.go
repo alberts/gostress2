@@ -107,6 +107,16 @@ func (w *work) GOTRACEBACK() string {
 	panic("GOTRACEBACK: invalid case")
 }
 
+func (w *work) sudo() []string {
+	switch rand.Intn(2) {
+	case 0:
+		return nil
+	case 1:
+		return []string{"sudo", "-E"}
+	}
+	panic("sudo: invalid case")
+}
+
 func (w *work) strace() []string {
 	switch rand.Intn(2) {
 	case 0:
@@ -197,6 +207,9 @@ func (w *work) Do() {
 	env = appendStr(env, w.GOTRACEBACK())
 
 	var args []string
+	if *sudo {
+		args = appendStr(args, w.sudo()...)
+	}
 	if *strace {
 		args = appendStr(args, w.strace()...)
 	}
@@ -236,6 +249,7 @@ var rebuild = flag.Bool("rebuild", false, "rebuild tests")
 var reps = flag.Int("reps", 1, "repetitions")
 var duration = flag.Duration("duration", 1*time.Minute, "duration")
 var strace = flag.Bool("strace", false, "strace some tests")
+var sudo = flag.Bool("sudo", false, "sudo some tests")
 
 func do(q <-chan *work, done <-chan struct{}) {
 	for {
