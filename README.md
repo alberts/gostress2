@@ -3,6 +3,21 @@ Introduction
 
 gostress2 runs Go tests repeatedly to expose intermittent failures.
 
+Usage
+=====
+
+```
+Usage of gostress2:
+  -duration=1m0s: duration
+  -list="std": packages to test
+  -race=false: use race detector
+  -rebuild=false: rebuild tests
+  -reps=1: repetitions
+  -seed=1364657604277567273: seed
+  -strace=false: strace some tests
+  -workers=1: number of workers
+```
+
 Examples
 ========
 
