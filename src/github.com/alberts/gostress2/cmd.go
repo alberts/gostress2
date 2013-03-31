@@ -12,9 +12,6 @@ import (
 var globalEnv = []string{
 	"TMPDIR=" + os.Getenv("TMPDIR"),
 	"PATH=" + os.Getenv("PATH"),
-	"GOOS=linux",
-	"GOARCH=amd64",
-	"GOHOSTARCH=amd64",
 	"GOPATH=" + os.Getenv("GOPATH"),
 }
 
