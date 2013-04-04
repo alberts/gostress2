@@ -140,7 +140,7 @@ func (w *work) testCpu() string {
 	if _, ok := slowTests[w.ImportPath]; ok {
 		return ""
 	}
-	maxLength := 9
+	maxLength := *maxcpus + 1
 	if *race {
 		maxLength = 3
 	}
@@ -189,7 +189,6 @@ func appendStr(v []string, s ...string) []string {
 
 func (w *work) Do() {
 	t0 := time.Now()
-	defer close(w.done)
 	defer func() {
 		w.reps--
 		w.timeLeft -= time.Now().Sub(t0)
@@ -250,6 +249,7 @@ var reps = flag.Int("reps", 1, "repetitions")
 var duration = flag.Duration("duration", 1*time.Minute, "duration")
 var strace = flag.Bool("strace", false, "strace some tests")
 var sudo = flag.Bool("sudo", false, "sudo some tests")
+var maxcpus = flag.Int("maxcpus", 8, "maximum number of -test.cpu values")
 
 func do(q <-chan *work, done <-chan struct{}) {
 	for {
@@ -258,11 +258,12 @@ func do(q <-chan *work, done <-chan struct{}) {
 			if !ok {
 				return
 			}
-			if err := w.Setup(); err != nil {
+			if err := w.Setup(); err == nil {
+				w.Do()
+			} else {
 				log.Printf("%s: %v\n", w.ImportPath, err)
-				continue
 			}
-			w.Do()
+			close(w.done)
 		case <-done:
 			return
 		}
