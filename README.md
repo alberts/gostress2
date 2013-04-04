@@ -8,8 +8,10 @@ Usage
 
 ```
 Usage of gostress2:
+  -bench=true: run benchmarks
   -duration=1m0s: duration
   -list="std": packages to test
+  -maxcpus=8: maximum number of -test.cpu values
   -race=false: use race detector
   -rebuild=false: rebuild tests
   -reps=1: repetitions

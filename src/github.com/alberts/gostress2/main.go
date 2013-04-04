@@ -171,7 +171,7 @@ func (w *work) testVerbose() string {
 }
 
 func (w *work) testBench() string {
-	if rand.Intn(2) == 0 {
+	if !*bench || rand.Intn(2) == 0 {
 		return ""
 	}
 	return "-test.bench=."
@@ -250,6 +250,7 @@ var duration = flag.Duration("duration", 1*time.Minute, "duration")
 var strace = flag.Bool("strace", false, "strace some tests")
 var sudo = flag.Bool("sudo", false, "sudo some tests")
 var maxcpus = flag.Int("maxcpus", 8, "maximum number of -test.cpu values")
+var bench = flag.Bool("bench", true, "run benchmarks")
 
 func do(q <-chan *work, done <-chan struct{}) {
 	for {
