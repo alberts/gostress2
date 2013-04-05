@@ -10,7 +10,7 @@ import (
 )
 
 var globalEnv = []string{
-	"TMPDIR=" + os.Getenv("TMPDIR"),
+	"TMPDIR=" + os.TempDir(),
 	"PATH=" + os.Getenv("PATH"),
 	"GOPATH=" + os.Getenv("GOPATH"),
 }
