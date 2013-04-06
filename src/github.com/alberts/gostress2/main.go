@@ -64,17 +64,15 @@ func (w *work) GOMAXPROCS() string {
 }
 
 func (w *work) GOGC() (string, bool) {
-	switch rand.Intn(5) {
+	switch rand.Intn(4) {
 	case 0:
 		return "", true
 	case 1:
 		return "GOGC=off", false
 	case 2:
-		return "GOGC=1", true
-	case 3:
 		return "GOGC=100", true
-	case 4:
-		return "GOGC=" + strconv.Itoa(1+rand.Intn(100)), true
+	case 3:
+		return "GOGC=" + strconv.Itoa(rand.Intn(101)), true
 	}
 	panic("GOGC: invalid case")
 }
@@ -128,11 +126,11 @@ func (w *work) strace() []string {
 }
 
 var slowTests = map[string]struct{}{
-	"archive/zip": struct{}{},
-	"math/big":    struct{}{},
-	"net":         struct{}{},
-	"net/http":    struct{}{},
-	"regexp":      struct{}{},
+	"archive/zip": {},
+	"math/big":    {},
+	"net":         {},
+	"net/http":    {},
+	"regexp":      {},
 }
 
 func (w *work) testCpu() string {
